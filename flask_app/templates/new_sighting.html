@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Sasquatch Websightings</h1>
+    <p class="sessionuser">{{ user[0].first_name }}</p>
+    <div>
+        <p>Report a sighting</p>
+        <a class="backhome1" href="/dashboard">Dashboard</a>
+        <a class="logout1" href="{{ url_for('logout') }}"> < Logout </a>
+    </div>
+
+    <form action="/create_sighting", method="post">
+        <div class="form">
+            <label class="header1" for="location">Location:</label>
+            <input class="headerbox1" type="text" name="location" id="location">
+            {% for message in get_flashed_messages(category_filter=['err_sightings_location']) %}
+                    <p class="errmsg">{{message}}</p>
+                    {% endfor %}
+        </div>
+        <div class="form">
+            <label class="header1" for="date">Date of sighting:</label>
+            <input class="headerbox1" type="date" name="date" id="date">
+            {% for message in get_flashed_messages(category_filter=['err_sightings_date']) %}
+                    <p class="errmsg">{{message}}</p>
+                    {% endfor %}
+        </div>
+        <div class="form">
+            <label class="header1" for="num_of_sas">Number of Sasquatches</label>
+            <input class="headerbox1" type="number" min="0" max="1000" name="num_of_sas" id="num_of_sas">
+            {% for message in get_flashed_messages(category_filter=['err_sightings_num_of_sas']) %}
+                    <p class="errmsg">{{message}}</p>
+                    {% endfor %}
+        </div>
+
+        <div class="form">
+            <label class="header1" for="happened">What happened?</label>
+            <input class="headerbox1" type="text" id="happened" name="happened">
+            {% for message in get_flashed_messages(category_filter=['err_sightings_happened']) %}
+                    <p class="errmsg">{{message}}</p>
+                    {% endfor %}
+        </div>
+
+        <button class="enterbtn">Report</button>
+    </form>
+
+</body>
+</html>

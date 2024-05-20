@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Sasquatch Websightings</h1>
+    <p class="sessionuser">{{ user[0].first_name }}</p>
+
+    <div class="line">
+        <a class= backhome href="/dashboard">Dashboard</a>
+        <a class="logout" href="{{ url_for('logout') }}"> < Logout</a>
+    </div>
+
+    <div>
+        <p class="welcome1">{{ sightings.location}} on {{ sightings.date }}</p>
+    </div>
+
+    <div class="showbox">
+        <p class="header">What Happened? :</p>
+        <p class="headerbox">{{ sightings.happened }}</p>
+
+        <p class="header">Number of Sasquatches:</p>
+        <p class="headerbox">{{ sightings.num_of_sas}}</p>
+
+        <p class="header">Reported by </p>
+        <p class="headerbox">{{ sightings.u.first_name}} {{ sightings.u.last_name}}</p>
+
+    </div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sasquatch Websightings</h1>
+    <p class="sessionuser">{{ session.first_name }}</p>
+    <div class="lowerHeader">
+        <p class="secondheader">Reported Sightings</p>
+        <a class="backhome1" href="/sighting/new">Report a sighting ></a>
+        <a class="logout1" href="{{ url_for('logout') }}">Logout</a>
+
+    </div>
+
+    <table>
+        <tr>
+            <th class="header">Location:</th>
+            <th class="header">Date of Sighting:</th>
+            <th class="header">Reported by</th>
+            <th class="header">Actions</th>
+        </tr>
+        {% for sighting in sightings %}
+        <tr>
+            <td class="headerbox">{{ sighting.location }}</td>
+            <td class="headerbox">{{ sighting.date }}</td>
+            <td class="headerbox">{{ sighting.u.first_name}} {{ sighting.u.last_name}}</td>
+            <td class="headerbox">
+                
+                <a class="links" href="/sighting/{{ sighting.id }}">View </a>
+                {% if session['user_id'] == sighting.u.id %}
+                    <a class="links" href="/sighting/edit/{{ sighting.id }}">Edit </a>
+                
+                    <a class="links" href="/sighting/delete/{{ sighting.id }}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
